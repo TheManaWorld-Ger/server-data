@@ -1,4 +1,4 @@
-server-data
+server-data/world/map/npc/
 ===========
 
 Nps's
