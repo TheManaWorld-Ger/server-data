@@ -1,7 +1,7 @@
 server-data/world/map/npc/
 ===========
 
-Nps's
+Npc's
 
 Die Npc's unseres Servers, sind mit einer Scriptänderung angepasst wurden.
 Somit ist es uns möglich, alle Quests Sowohl English als auch Deutsch anzubieten.
