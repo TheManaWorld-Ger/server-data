@@ -1,0 +1,49 @@
+//
+
+021-1.gat,141,113,0|script|Eurni|136,
+{
+    set @hw2011_npc_id, $@hw2011_npc_eurni;
+    if (gettime(7) == $@hw2011_year && gettime(6) == 10 && gettime(5) >= $@hw2011_start_day)
+        goto L_TrickOrTreat;
+
+L_Begin:
+    if (BaseLevel < 10) goto L_TooYoung;
+    if (Zeny < 10000) goto L_NoMoney;
+
+    mes "[Eurni the Surgeon]";
+    mes "\"Are you tired of being what you are?\"";
+    next;
+
+    mes "[Eurni the Surgeon]";
+    mes "\"Would you maybe be interested in a sex change?\"";
+    next;
+
+    mes "[Server]";
+    mes "Warning: All characters under this login will be changed. Once it's done, you will be kicked from the server. Don't panic, as everything is fine.";
+    next;
+    menu
+        "Please do, my dear...", L_Change,
+        "Leave alone my family treasure!", -;
+    close;
+
+L_Change:
+    if (Zeny < 10000)
+        goto L_No_Money;
+    set Zeny, Zeny - 10000;
+    changesex;
+    close;
+
+L_TooYoung:
+    mes "[Eurni the Surgeon]";
+    mes "\"Move along, kid.\"";
+    close;
+
+L_NoMoney:
+    mes "[Eurni the Surgeon]";
+    mes "\"You don't have enough to pay for my services.\"";
+    close;
+
+L_TrickOrTreat:
+    callfunc "TrickOrTreat2011";
+    goto L_Begin;
+}

@@ -1,0 +1,19 @@
+// ------------------------------------------------------------
+// Variables passed to this script:
+//  @slotId   The slot in which the item would have been equipped in.
+//            This is passed automagically when called in an equip script.
+//  @bStat    The stat to check against.
+//            Usually one of: bStr, bAgi, bVit, bInt, bDex, bLuk;
+//            but can be anything that works with readparam().
+//  @minbStatVal The minimum stat value to accept this item.
+// ------------------------------------------------------------
+
+function|script|RequireStat|,
+{
+    set @bStatVal, readparam(@bStat);
+    // If the requirement isn't met, then we end the script.
+    // Hence, subsequent item modifiers won't be applied.
+    if (@bStatVal < @minbStatVal)
+        end;
+    return;
+}
