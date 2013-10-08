@@ -43,6 +43,7 @@ L_German:
     next;
     mes "Automatisiertes Spielverhalten liegt vor, wenn ein sich bewegender/kämpfender Spieler nicht intelligent auf Gesprächsaufforderungen reagiert.";
     next;
+	set LanguageGer, LanguageGer | 1;
     goto L_End;
 
 L_Dutch:
