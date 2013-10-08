@@ -2,6 +2,7 @@
 
 function|script|Banker|,
 {
+	if( LanguageGer & 1) goto L_German;
     if (BankAccount == 0)
         goto L_Start;
     callsub S_MoveAccount;
@@ -248,4 +249,258 @@ L_Change_Storage:
 L_Change_Bank:
     set #BankOptions, (#BankOptions ^ OPT_BANK_CLOSE);
     goto L_Start;
+	
+	
+	    
+//Hier beginnt die Deutsche Questfassung!!!	
+
+		
+L_German:		
+		
+	if (BankAccount == 0)
+        goto L_Anfang;
+    callsub S_MoveAccountGer;
+
+L_Anfang:
+    mes "[" + @npcname$ + "]";
+    mes "\"Willkommen bei der Bank!";
+    mes "Wie kann ich dir Helfen?\"";
+    next;
+    menu
+        "Zeige mein Lager", L_Lager,
+        "Einzahlen", L_Ez,
+        "Abheben", L_Ah,
+        "Zeige meinen Kontostand", L_Kontostand,
+        "Aendere meine Bank-Optionen", L_Aendern,
+        "Aufwiedersehen", L_Aw;
+    close;
+
+// need to close window before opening storage.
+L_Lager:
+    if (#BankOptions & OPT_STORAGE_CLOSE) close2;
+    openstorage;
+    if (#BankOptions & OPT_STORAGE_CLOSE) end;
+    goto L_Anfang;
+
+L_Ez:
+    mes "[" + @npcname$ + "]";
+    mes "\"Wie viel möchtest du Einzahlen?\"";
+    next;
+    menu
+        "Anderer Betrag", L_Ez_Input,
+        "5,000 GP", L_Ez_5k,
+        "10,000 GP", L_Ez_10k,
+        "25,000 GP", L_Ez_25k,
+        "50,000 GP", L_Ez_50k,
+        "100,000 GP", L_Ez_100k,
+        "250,000 GP", L_Ez_250k,
+        "500,000 GP", L_Ez_500k,
+        "1,000,000 GP", L_Ez_1kk,
+        "Alles was ich besitze", L_Ez_All,
+        "Ich habe meine Meinung geändert", L_Anfang,
+        "Auf Wiedersehen", -;
+    return;
+
+L_Ez_Input:
+    input @Amount;
+    if (@Amount >= 0)
+        goto L_Ez_Continue;
+    mes "[" + @npcname$ + "]";
+    mes "\"Ich brauche einen positiven Betrag. Was möchtest du jetzt tun?\"";
+    menu
+        "Zum Anfang", L_Anfang,
+        "Noch ein mal", L_Ez_Input,
+        "Alles Einzahlen", L_Ez_All,
+        "Auf Wiedersehen", -;
+    goto L_Aw;
+
+L_Ez_5k:
+    if (Zeny<5000)
+        goto L_KeinGeld;
+    set @Amount, 5000;
+    goto L_Ez_Continue;
+
+L_Ez_10k:
+    if (Zeny<10000)
+        goto L_KeinGeld;
+    set @Amount, 10000;
+    goto L_Ez_Continue;
+
+L_Ez_25k:
+    if (Zeny<25000)
+        goto L_KeinGeld;
+    set @Amount, 25000;
+    goto L_Ez_Continue;
+
+L_Ez_50k:
+    if (Zeny<50000)
+        goto L_KeinGeld;
+    set @Amount, 50000;
+    goto L_Ez_Continue;
+
+L_Ez_100k:
+    if (Zeny<100000)
+        goto L_KeinGeld;
+    set @Amount, 100000;
+    goto L_Ez_Continue;
+
+L_Ez_250k:
+    if (Zeny<250000)
+        goto L_KeinGeld;
+    set @Amount, 250000;
+    goto L_Ez_Continue;
+
+L_Ez_500k:
+    if (Zeny<500000)
+        goto L_KeinGeld;
+    set @Amount, 500000;
+    goto L_Ez_Continue;
+
+L_Ez_1kk:
+    if (Zeny<1000000)
+        goto L_KeinGeld;
+    set @Amount, 1000000;
+    goto L_Ez_Continue;
+
+L_Ez_All:
+    if (Zeny<1)
+        goto L_KeinGeld;
+    set @Amount, Zeny;
+
+L_Ez_Continue:
+    if (Zeny < @Amount)
+        goto L_KeinGeld;
+    set Zeny, Zeny - @Amount;
+    set #BankAccount, #BankAccount + @Amount;
+    goto L_Kontostand;
+
+L_Ah:
+    mes "[" + @npcname$ + "]";
+    mes "\"Wie viel möchtest du Abheben?\"";
+    menu
+        "Other", L_Ah_Input,
+        "5,000 GP", L_Ah_5k,
+        "10,000 GP", L_Ah_10k,
+        "25,000 GP", L_Ah_25k,
+        "50,000 GP", L_Ah_50k,
+        "100,000 GP", L_Ah_100k,
+        "250,000 GP", L_Ah_250k,
+        "500,000 GP", L_Ah_500k,
+        "1,000,000 GP", L_Ah_1kk,
+        "Alles was auf meinem Konto ist", L_Ah_All,
+        "Ich habe meine Meinung geaendern", L_Anfang,
+        "Auf Wiedersehen", -;
+    return;
+
+L_Ah_Input:
+    input @Amount;
+    if (@Amount >= 0)
+        goto L_Ah_Continue;
+    mes "[" + @npcname$ + "]";
+    mes "\"Ich brauche einen Positiven Betrag. Was möchtest du jetzt tun?\"";
+    menu
+        "Zum Anfang", L_Anfang,
+        "Noch einmal", L_Ah_Input,
+        "Alles Abheben", L_Ah_All,
+        "Auf Wiedersehen", -;
+    goto L_Aw;
+
+L_Ah_5k:
+    if (#BankAccount < 5000)
+        goto L_KeinGeld;
+    set @Amount, 5000;
+    goto L_Ah_Continue;
+
+L_Ah_10k:
+    if (#BankAccount < 10000)
+        goto L_KeinGeld;
+    set @Amount, 10000;
+    goto L_Ah_Continue;
+
+L_Ah_25k:
+    if (#BankAccount < 25000)
+        goto L_KeinGeld;
+    set @Amount, 25000;
+    goto L_Ah_Continue;
+
+L_Ah_50k:
+    if (#BankAccount < 50000)
+        goto L_KeinGeld;
+    set @Amount, 50000;
+    goto L_Ah_Continue;
+
+L_Ah_100k:
+    if (#BankAccount < 100000)
+        goto L_KeinGeld;
+    set @Amount, 100000;
+    goto L_Ah_Continue;
+
+L_Ah_250k:
+    if (#BankAccount < 250000)
+        goto L_KeinGeld;
+    set @Amount, 250000;
+    goto L_Ah_Continue;
+
+L_Ah_500k:
+    if (#BankAccount < 500000)
+        goto L_KeinGeld;
+    set @Amount, 500000;
+    goto L_Ah_Continue;
+
+L_Ah_1kk:
+    if (#BankAccount < 1000000)
+        goto L_KeinGeld;
+    set @Amount, 1000000;
+    goto L_Ah_Continue;
+
+L_Ah_All:
+    if (#BankAccount < 0)
+        goto L_KeinGeld;
+    set @Amount, #BankAccount;
+
+L_Ah_Continue:
+    if (#BankAccount < @Amount)
+        goto L_KeinGeld;
+    set Zeny, Zeny + @Amount;
+    set #BankAccount, #BankAccount - @Amount;
+    goto L_Kontostand;
+
+L_Kontostand:
+    mes "[" + @npcname$ + "]";
+    mes "\"Auf deinem Bankkonto sind jetzt:";
+    mes #BankAccount + " GP\"";
+    if (#BankOptions & OPT_BANK_CLOSE) close;
+    goto L_Anfang;
+
+L_Aw:
+    mes "[" + @npcname$ + "]";
+    mes "\"Auf Wiedersehen.\"";
+    return;
+
+L_KeinGeld:
+    mes "[" + @npcname$ + "]";
+    mes "\"Oh, ich sehe du hast nicht genug GP.\"";
+    goto L_Anfang;
+
+S_MoveAccountGer:
+    set #BankAccount, #BankAccount + BankAccount;
+    set BankAccount, 0;
+    return;
+
+L_Aendern:
+    setarray @menuitems$, "Optionen Beibehalten", "Nach dem ändern der Lager-Optionen, NPC-Dialog schliesen", "Nach dem einsehen deines Kontostandes, NPC-Dialog Schliesen ";
+    if (#BankOptions & OPT_STORAGE_CLOSE) set @menuitems$[1], "Nach verlassen des Lagers, zurück zum Hauptmenü";
+    if (#BankOptions & OPT_BANK_CLOSE) set @menuitems$[2], "Nach verlassen der Bank, zurück zum Hauptmenü";
+    menu
+        @menuitems$[0], L_Anfang,
+        @menuitems$[1], L_Aendere_Lager,
+        @menuitems$[2], L_Aendere_Bank;
+
+L_Aendere_Lager:
+    set #BankOptions, (#BankOptions ^ OPT_STORAGE_CLOSE);
+    goto L_Anfang;
+
+L_Aendere_Bank:
+    set #BankOptions, (#BankOptions ^ OPT_BANK_CLOSE);
+    goto L_Anfang;
 }
