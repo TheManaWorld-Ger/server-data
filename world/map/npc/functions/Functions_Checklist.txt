@@ -1,0 +1,15 @@
+//Checklist for D&E Npc's (001-1)
+--//001-1://--
+banker.txt								//*DONE*//						
+barber.txt								//*---*//
+dailyquest.txt							//*---*//
+debug.txt								//*---*//
+evil_obelisk.txt						//*---*//
+ferry.txt								//*---*//
+games_rules.txt							//*DONE*//
+inn.txt									//*---*//
+lockpicking.txt							//*---*//
+magic.txt								//*---*//
+slot_machine.txt						//*---*//
+soul_menhir.txt							//*---*//
+water_bottle.txt						//*---*//
