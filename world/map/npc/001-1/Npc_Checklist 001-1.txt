@@ -1,0 +1,25 @@
+//Checklist for D&E Npc's (001-1)
+--//001-1://--
+banker.txt								//*DONE*//						
+barber.txt								//*---*//
+bard.txt								//*---*//
+bernard.txt								//*---*//
+bleacher.txt							//*---*//
+children.txt							//*---*//
+constable.txt							//*---*//
+elanore.txt								//*---*//
+entertainer.txt							//*---*//
+gossip.txt								//*---*//
+guards.txt								//*---*//
+guide.txt								//*---*//
+luca.txt								//*---*//
+mikhail.txt								//*---*//
+monster_guide.txt						//*---*//
+npcs.txt								//*---*//
+reward_master.txt						//*---*//
+sandra.txt								//*DONE*//
+sarah.txt								//*---*//
+soul-menhir.txt							//*---*//
+trader.txt								//*---*//
+vincent.txt
+
