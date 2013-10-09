@@ -11,8 +11,8 @@
 
 function|script|Barber|,
 {
-  set @style, getlook(LOOK_HAIR_STYLE);
 	if( LanguageGer & 1) goto L_German;
+		
 	set @style, getlook(LOOK_HAIR_STYLE);
     set @color, getlook(LOOK_HAIR_COLOR);
 
@@ -24,8 +24,6 @@ function|script|Barber|,
         set @color$, $@HairColors$[@color];
     if (@color == 127)
         set @color$, "Shocked White";
-
-  if( LanguageGer & 1) goto L_German;
 		
 	
     mes "Your current style is " + @style$ + " and your current color is " + @color$ + ".";
@@ -115,12 +113,13 @@ L_Done:
     set @style, 0;
     set @color, 0;
     return;
-}
+
 
 	
 
 	
 	//HIER BEGINNT DIE DEUTSCHE FASSUNG!!!
+
 L_German:
 
 	set @style, getlook(LOOK_HAIR_STYLE);
@@ -223,23 +222,6 @@ LG_Done:
     set @color, 0;
     return;
 }
-
-// Since this is a function, not an NPC, OnInit doesn't work
-// So call this from a real NPC's OnInit (001-1/barber.txt)
-function|script|OnInitBarber|,
-{
-    setarray $@HairStyles$,
-        "Bald", "Flat ponytail", "Bowl cut", "Combed back", "Emo", "Mohawk",
-        "Pompadour", "Center parting/Short and slick", "Long and slick",
-        "Short and curly", "Pigtails", "Long and curly", "Parted",
-        "Perky ponytail", "Wave", "Mane", "Bun", "Shoulder Length Flick",
-        "Fizzy", "Long and Clipped";
-    setarray $@HairColors$,
-        "Brunette", "Green", "Dark red", "Light purple", "Gray", "Blonde",
-        "Teal", "Light red", "Blue", "Dark purple", "Black", "Pink",
-        "Brown";
-    return;
-
 
 
 
