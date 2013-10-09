@@ -17,10 +17,10 @@
     if(LanguageGer==1)
       if (getskilllv(SKILL_EMOTE) > 0) goto LG_Has;
       mes "[Entertainer]";
-      mes "\"Yes how can I help you?\"";
+      mes "\"Wie kann ich dir helfen?\"";
       menu
-          "How are you showing emotions above your head?", LG_Learn,
-          "Never mind", -;
+          "Wie zeigst du die Smileys über deinem Kopf?", LG_Learn,
+          "Schon gut", -;
       goto LG_Close;
       next;
 
@@ -62,24 +62,24 @@ OnInit:
 
 LG_Learn:
     mes "[Entertainer]";
-    mes "\"They are called emotes, I use them to express how I am feeling.";
-    mes "I can teach you if you'd like?\"";
+    mes "\"Sie werden Smileys genannt, ich drücke mit ihrer Hilfe meine Gefühle aus.";
+    mes "Möchtest du, dass ich dir ihren Gebrauch lehre?"";
     menu
-        "Yes please.", LG_Learn2,
-        "I don't see the point right now.", -;
+        "Ja, bitte.", LG_Learn2,
+        "Ich wüsste derzeit nicht weshalb.", -;
     goto LG_Close;
 
 LG_Learn2:
     setskill SKILL_EMOTE, 1;
     mes "[Entertainer]";
-    mes "\"All you have to do is press alt and a number.";
-    mes "The number determines what emotion will be shown.";
-    mes "Some clients will also show an emote shortcut-bar with the F12 button\"";
+    mes "\"Alles was du tun musst ist ALT und eine Nummer gleichzeitig zu drücken.";
+    mes "Die Nummer bestimmt welcher Smiley angezeigt wird.";
+    mes "Einige Spiel-Clients zeigen dir eine Smiley-Shortcut-Leiste, wenn du F12 drückst.\"";
     goto LG_Close;
 
 LG_Has:
     mes "[Entertainer]";
-    mes "\"The entertainment life is a hard life...\" *sigh*";
+    mes "\"Das Leben eines Unterhaltungskünstlers ist ein hartes leben.\" Seufz.";
     goto LG_Close;
 
 LG_Close:
