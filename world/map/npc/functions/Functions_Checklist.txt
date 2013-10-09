@@ -1,7 +1,7 @@
 //Checklist for D&E (functions)
 --//functions://--
 banker.txt								//*DONE*//						
-barber.txt								//*---*//
+barber.txt								//*DONE*//
 dailyquest.txt							//*---*//
 debug.txt								//*---*//
 evil_obelisk.txt						//*---*//
