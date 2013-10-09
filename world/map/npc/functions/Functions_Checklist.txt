@@ -1,5 +1,5 @@
-//Checklist for D&E Npc's (001-1)
---//001-1://--
+//Checklist for D&E (functions)
+--//functions://--
 banker.txt								//*DONE*//						
 barber.txt								//*---*//
 dailyquest.txt							//*---*//
