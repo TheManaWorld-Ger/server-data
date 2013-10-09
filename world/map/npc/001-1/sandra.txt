@@ -5,8 +5,8 @@
 	
 	
     // This NPC previously used the variable TMW_Quest
-    callfunc "ClearVarTMW_Quest";
-	if( LanguageGer & 1) goto L_German;
+    if( LanguageGer & 1) goto L_German;
+	callfunc "ClearVarTMW_Quest";
 	set @state, ((QUEST_SouthTulimshar & NIBBLE_3_MASK) >> NIBBLE_3_SHIFT);
 
     if (@state >= 2) goto L_Done;
@@ -119,118 +119,123 @@ S_Update_Var:
     return;
 
 	
+	
 	//Hier beginnt die Deutsche Questfassung!!!
 	
+	
+	
+	
 L_German:
-
+	
+	callfunc "ClearVarTMW_Quest";
 	set @state, ((QUEST_SouthTulimshar & NIBBLE_3_MASK) >> NIBBLE_3_SHIFT);
 	
-    if (@state >= 2) goto L_Fertig;
-    if (@state == 1) goto L_Laeuft;
+    if (@state >= 2) goto LG_Done;
+    if (@state == 1) goto LG_Progress;
 
     mes "[Sandra]";
     mes "\"Die Jagt nach Monstern, um Zutaten für Zaubertränke zu bekommen, kann manchmal sehr schwierig sein.\"";
     next;
 
     set @TEMP, rand(4);
-    if(@TEMP == 0) goto L_Offen0;
-    if(@TEMP == 1) goto L_Offen1;
-    if(@TEMP == 2) goto L_Offen2;
-    if(@TEMP == 3) goto L_Offen3;
+    if(@TEMP == 0) goto LG_Opening0;
+    if(@TEMP == 1) goto LG_Opening1;
+    if(@TEMP == 2) goto LG_Opening2;
+    if(@TEMP == 3) goto LG_Opening3;
 
-L_Offen0:
+LG_Opening0:
     mes "\"Am Stadtrand von Tulimshar sind einige Skorpione. Ich habe eine Bitte, hilfst du mir?\"";
     next;
-    goto L_Frage;
+    goto LG_Ask;
 
-L_Offen1:
+LG_Opening1:
     mes "\"Wenn du zum Stadtrand läufst, kannst du mir helfen einige Skorpione zu töten?\"";
     next;
-    goto L_Frage;
+    goto LG_Ask;
 
-L_Offen2:
+LG_Opening2:
     mes "\"Die Skorpion-Stachel haben viele Eigenschaften in sich, um Tränke herzustellen. Kannst du welche für mich finden?\"";
     next;
-    goto L_Frage;
+    goto LG_Ask;
 
-L_Offen3:
+LG_Opening3:
     mes "\"Du siehst stark genug aus, kannst du mir helfen etwas zu finden?\"";
     next;
-    goto L_Frage;
+    goto LG_Ask;
 
-L_Frage:
+LG_Ask:
     menu
-        "Ja.", L_Ja,
-        "Nein.", L_Schliessen;
+        "Ja.", LG_Yes,
+        "Nein.", LG_Close;
 
-L_Ja:
+LG_Yes:
     set @TEMP, rand(3);
-    if(@TEMP == 0) goto L_Rueckm0;
-    if(@TEMP == 1) goto L_Rueckm1;
-    if(@TEMP == 2) goto L_Rueckm2;
+    if(@TEMP == 0) goto LG_Req0;
+    if(@TEMP == 1) goto LG_Req1;
+    if(@TEMP == 2) goto LG_Req2;
 
-L_Rueckm0:
+LG_Req0:
     mes "[Sandra]";
     mes "\"Ich brauche 5 [Skorpionsstachel].\"";
     next;
-    goto L_Stellen;
+    goto LG_Set;
 
-L_Rueckm1:
+LG_Req1:
     mes "[Sandra]";
     mes "\"Vor eine Weile hörte ich, dass Skorpionsstachel für medizinische Zwecke verwendet werden können. Ich brauche deine Hilfe, um 5 [Skorpionsstachel] zu beschaffen.\"";
     next;
-    goto L_Stellen;
+    goto LG_Set;
 
-L_Rueckm2:
+LG_Req2:
     mes "[Sandra]";
     mes "\"Bring mir 5 [Skorpionenstachel]. Ich gebe dir auch etwas dafür, wenn du mir hilfst.\"";
     next;
-    goto L_Stellen;
+    goto LG_Set;
 
-L_Stellen:
+LG_Set:
     set @state, 1;
-    callsub S_Update_Var;
+    callsub SG_Update_Var;
     mes "\"Bitte bring sie mir!\"";
-    goto L_Schliessen;
+    goto LG_Close;
 
-L_Laeuft:
+LG_Progress:
     if (countitem("ScorpionStinger") < 5)
-        goto L_ZuWenig;
+        goto L_NotEnough;
     mes "[Sandra]";
     mes "\"Wunderbar!";
     mes "Du hast mir 5 [Skorpionsstachel] gebracht!\"";
     getinventorylist;
     if (@inventorylist_count + (countitem("ScorpionStinger") == 5) - (countitem("Arrow") == 0) > 99)
-        goto L_KeinPlatz;
+        goto L_TooMany;
     delitem "ScorpionStinger", 5;
     getitem "Bow", 1;
     getitem "Arrow", 100;
     set @state, 2;
-    callsub S_UpdateGer_Var;
-    goto L_Schliessen;
+    callsub SG_Update_Var;
+    goto LG_Close;
 
-L_ZuWenig:
+LG_NotEnough:
     mes "[Sandra]";
     mes "\"Bitte beeil' dich und bring mir 5 [Skorpionenstachel].\"";
-    goto L_Schliessen;
+    goto LG_Close;
 
-L_Fertig:
+LG_Fertig:
     mes "[Sandra]";
     mes "\"Vielen Dank für deine Hilfe!\"";
-    goto L_Schliessen;
+    goto LG_Close;
 
-L_Schliessen:
+LG_Close:
     set @TEMP, 0;
     set @state, 0;
     close;
 
-L_KeinPlatz:
+LG_TooMany:
     next;
     mes "[Sandra]";
     mes "\"Du hast nicht genug Platz für mein Geschenk. Komm wieder, wenn du etwas Platz gemacht hast.\"";
-    goto L_Schliessen;
+    goto L_Close;
 
-S_UpdateGer_Var:
+SG_Update_Var:
     set QUEST_SouthTulimshar, (QUEST_SouthTulimshar & ~(NIBBLE_3_MASK) | (@state << NIBBLE_3_SHIFT));
     return;
 }
