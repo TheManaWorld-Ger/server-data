@@ -11,10 +11,15 @@
 
 function|script|Barber|,
 {
+<<<<<<< HEAD
   set @style, getlook(LOOK_HAIR_STYLE);
+=======
+	if( LanguageGer & 1) goto L_German;
+	set @style, getlook(LOOK_HAIR_STYLE);
+>>>>>>> upstream/master
     set @color, getlook(LOOK_HAIR_COLOR);
 
-    set @style$, "Unknown";
+	set @style$, "Unknown";
     set @color$, "Unknown";
     if (@style >= 0 && @style < 20)
         set @style$, $@HairStyles$[@style];
@@ -22,8 +27,13 @@ function|script|Barber|,
         set @color$, $@HairColors$[@color];
     if (@color == 127)
         set @color$, "Shocked White";
+<<<<<<< HEAD
 
   if( LanguageGer & 1) goto L_German;
+=======
+		
+	
+>>>>>>> upstream/master
     mes "Your current style is " + @style$ + " and your current color is " + @color$ + ".";
     set @style$, "";
     set @color$, "";
@@ -111,8 +121,29 @@ L_Done:
     set @style, 0;
     set @color, 0;
     return;
+<<<<<<< HEAD
 }
+=======
+
+	
+
+	
+	//HIER BEGINNT DIE DEUTSCHE FASSUNG!!!
+	
+>>>>>>> upstream/master
 L_German:
+
+	set @style, getlook(LOOK_HAIR_STYLE);
+    set @color, getlook(LOOK_HAIR_COLOR);
+
+	set @style$, "Unknown";
+    set @color$, "Unknown";
+    if (@style >= 0 && @style < 20)
+        set @style$, $@HairStyles$[@style];
+    if (@color >= 0 && @color < 20)
+        set @color$, $@HairColors$[@color];
+    if (@color == 127)
+        set @color$, "Shocked White";
 
     mes "Dein momentaner Style ist " + @style$ + " mit der Farbe " + @color$ + ".";
     set @style$, "";

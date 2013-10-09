@@ -12,11 +12,6 @@
     mes "\"Come again!\"";
     close;
 
-// OnInit doesn't work for functions, they need our help
-OnInit:
-    callfunc "OnInitBarber";
-	
-
 	//HIER BEGINNT DIE DEUTSCHE FASSUNG!!!
 	
 	
@@ -31,6 +26,6 @@ L_German:
     close;
 
 // OnInit doesn't work for functions, they need our help
-OnInitG:
+OnInit:
     callfunc "OnInitBarber";
 }
