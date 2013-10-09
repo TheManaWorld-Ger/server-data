@@ -14,3 +14,5 @@ welche deutlich besagt, dass die Startblöcke der NPC's(L_) folgend benannt werd
 müssen:
    * Im Englischen Bereich wird einfach nur ein "L_" genutzt. Beispiel: L_Start
    * Beim Deutschsprachigen Bereich der NPC-Dateien wird vorranstehend "LG_" genutzt. Beispiel: "LG_Start"
+   * Dess weiteren ist darauf zu achten, dass der Name des Fertigen Npc in diesen klammern
+    "[ ]" geschrieben wird. Bsp.: "001-1.gat,110,71,0|script|Sandra|114,"  wird zu  "001-1.gat,110,71,0|script|[Sandra]|114,"
