@@ -1,0 +1,6 @@
+//Npc D&E Checklist All Npc's
+//001-1					2/22
+//001-2					0/6
+
+
+//functions				1/*
