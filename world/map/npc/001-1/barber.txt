@@ -1,7 +1,9 @@
 //
 
-001-1.gat,53,38,0|script|Nicolas|100,
+001-1.gat,53,38,0|script|[Nicolas]|100,
 {
+	if( LanguageGer & 1) goto L_German;
+	
     mes "[Nicolas the Barber]";
     mes "\"Do you need a barber?\"";
     next;
@@ -12,5 +14,23 @@
 
 // OnInit doesn't work for functions, they need our help
 OnInit:
+    callfunc "OnInitBarber";
+	
+
+	//HIER BEGINNT DIE DEUTSCHE FASSUNG!!!
+	
+	
+L_German:
+
+	mes "[Nicolas Der Barber]";
+    mes "\"Brauchst du einen Frisör?\"";
+    next;
+    callfunc "Barber";
+    mes "[Nicolas Der Barber]";
+    mes "\"Komm' bald wieder!\"";
+    close;
+
+// OnInit doesn't work for functions, they need our help
+OnInitG:
     callfunc "OnInitBarber";
 }
