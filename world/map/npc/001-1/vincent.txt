@@ -145,7 +145,7 @@ LG_Begin:
 
 LG_Convince_Vincent_First:
     mes "[Vincent]";
-    mes "\"Ich stelle eine Spielfigur her. Ich bin damit fast fertig.\"";
+    mes "\"Ich stelle eine Spielfigur her und bin fast fertig damit!.\"";
     next;
 
     set @TEMP, rand(4);
