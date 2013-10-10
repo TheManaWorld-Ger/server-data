@@ -174,11 +174,11 @@ LG_SNAKE:
     set Zeny, Zeny - @cost_snake;
     goto LG_Summon;
 
-L_Summon:
+LG_Summon:
     areamonster @map$, @x0, @y0, @x1, @y1, "Evil", @mob_id, @mob_count;
     goto LG_Close;
 
-L_NotEnough:
+LG_NotEnough:
     mes "You don't have that much money";
     goto LG_Close;
 
