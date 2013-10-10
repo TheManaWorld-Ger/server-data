@@ -1,11 +1,14 @@
 // Variables used: nibble 2 of QUEST_SouthTulimshar
 
-001-1.gat,135,42,0|script|Vincent|113,
+001-1.gat,135,42,0|script|[Vincent]|113,
 {
+    if(LanguageGer==0) goto L_Main;
+    if(LanguageGer==1) goto LG_Main;
+
+L_Main:
     set @hw2011_npc_id, $@hw2011_npc_vincent;
     if (gettime(7) == $@hw2011_year && gettime(6) == 10 && gettime(5) >= $@hw2011_start_day)
         goto L_TrickOrTreat;
-
 L_Begin:
     // This NPC previously used the variable TMW_Quest
     callfunc "ClearVarTMW_Quest";
@@ -124,6 +127,133 @@ L_Close:
     set @state, 0;
     close;
 
+  //HIER BEGINNT DIE DEUTSCHE FASSUNG!!!
+
+LG_Main:
+    set @hw2011_npc_id, $@hw2011_npc_vincent;
+    if (gettime(7) == $@hw2011_year && gettime(6) == 10 && gettime(5) >= $@hw2011_start_day)
+        goto L_TrickOrTreat;
+
+LG_Begin:
+    // This NPC previously used the variable TMW_Quest
+    callfunc "ClearVarTMW_Quest";
+
+    set @state, ((QUEST_SouthTulimshar & NIBBLE_2_MASK) >> NIBBLE_2_SHIFT);
+
+    if (@state >= 2) goto LG_Done;
+    if (@state == 1) goto LG_Progress;
+
+LG_Convince_Vincent_First:
+    mes "[Vincent]";
+    mes "\"Ich stelle eine Spielfigur her und bin fast fertig damit!.\"";
+    next;
+
+    set @TEMP, rand(4);
+    if(@TEMP == 0) goto LG_Opening1;
+    if(@TEMP == 1) goto LG_Opening2;
+    if(@TEMP == 2) goto LG_Opening3;
+    if(@TEMP == 3) goto LG_Opening4;
+
+LG_Opening1:
+    mes "\"Ich benötige nur 10 weitere Beinchen um meine Spielfigur fertigstellen zu können!\"";
+    next;
+    goto LG_Ask;
+
+LG_Opening2:
+    mes "\"Diese Maden-Spielfigur ist großartig! Ich muss nur noch 10 Beinchen anbringen.\"";
+    next;
+    goto LG_Ask;
+
+LG_Opening3:
+    mes "\"Das ist eine großartige Spielfigur! Alles was mir fehlt sind einige Teile...\"";
+    next;
+    goto LG_Ask;
+
+LG_Opening4:
+    mes "\"Kannst du mir 10 Beinchen bringen? Ich benötige sie um teile der Spielfigur zu ersetzen.\"";
+    next;
+    goto LG_Ask;
+
+LG_Ask:
+    mes "\"Hilfst du mir 10 Beinchen zu finden?\"";
+    next;
+    menu
+        "Ja.", LG_Sure,
+        "Nein.", LG_Close;
+
+LG_Sure:
+    set @state, 1;
+    callsub S_Update_Var;
+    set @TEMP, rand(4);
+    if(@TEMP == 0) goto LG_Req1;
+    if(@TEMP == 1) goto LG_Req2;
+    if(@TEMP == 2) goto LG_Req3;
+    if(@TEMP == 3) goto LG_Req4;
+
+LG_Req1:
+    mes "[Vincent]";
+    mes "\"Danke dir!\"";
+    next;
+    goto LG_Wait;
+
+LG_Req2:
+    mes "[Vincent]";
+    mes "\"Ich kann dir gar nicht genug danken!\"";
+    next;
+    goto LG_Wait;
+
+LG_Req3:
+    mes "[Vincent]";
+    mes "\"Ich werde es dir danken, wenn du sie mir bringst!\"";
+    next;
+    goto LG_Wait;
+
+LG_Req4:
+    mes "[Vincent]";
+    mes "\"Ich werde dir sicher eine kleine Belohnung geben.\"";
+    next;
+    goto LG_Wait;
+
+LG_Wait:
+    mes "\"Nun geh und hole mir bitte 10 Beinchen.\"";
+    goto LG_Close;
+
+LG_Progress:
+    if(countitem("BugLeg") >= 10)
+        goto LG_Have;
+    mes "[Vincent]";
+    mes "\"Bitte hilf mir 10 Beinchen zu sammeln! Ich benötige sie um meine Spielfigur zu vollenden.\"";
+    goto LG_Close;
+
+LG_Have:
+    mes "[Vincent]";
+    mes "\"Vortrefflich! Endlich kann ich mein Model vollenden!!\"";
+    next;
+    if(countitem("BugLeg") < 10)
+        goto LG_Progress;
+    delitem "BugLeg", 10;
+    set Zeny, Zeny + 1000;
+    set @state, 2;
+    callsub S_Update_Var;
+
+    mes "[Vincent]";
+    mes "\"Hier, nimm das als Zeichen meines Dankes!\"";
+    mes "";
+    mes "[1000 gold]";
+    goto LG_Close;
+
+LG_Done:
+    mes "[Vincent]";
+    mes "\"Danke für deine Hilfe!\"";
+    goto LG_Close;
+
+LG_Close:
+    set @TEMP, 0;
+    set @state, 0;
+    close;
+
+
+//ServerRelated
 S_Update_Var:
     set QUEST_SouthTulimshar, (QUEST_SouthTulimshar & ~(NIBBLE_2_MASK) | (@state << NIBBLE_2_SHIFT));
     return;
