@@ -1,0 +1,82 @@
+--//Level 40: Developers\\--
+
+@broadcast
+Sendet eine Nachricht (mit deinem namen) an den Gesamten Server.
+
+@localbroadcast
+Sendet eine Nachricht (mit deinem namen) an die Gesamte Map.
+
+@die
+Tötet dich Selber.
+
+@where
+Sucht jemanden auf der Map.
+
+//@go
+//Geht zu bestimmten Punkten die von "eAthena" geerbt wurden (Weitestgehend NUTZLOS!).
+
+@goto
+Warpt dich zu der angegebenen Person.
+
+//@follow
+//Nicht mehr Relevant, da vom TMW-Client nicht unterstützt.
+
+@who
+Zeigt eine Liste aller Online Character und ihre Position.
+
+@whogroup
+Zeigt eine Liste aller Online Character und Ihre Gruppe/Gilde.
+
+@whomap
+Zeigt eine Liste aller Online Character auf deiner Map und ihre Position.
+
+@whomapgroup
+Zeigt eine Liste aller Online Character auf deiner Map und deren Gruppe/Gilde.
+
+@whogm
+Gleich wie @who, jedoch Zeigt dieser Command nur Online-GM's.
+
+@charstats
+Zeigt alle Stats des angegebenen Characters.
+
+@heal
+Heilt den angegebenen Character (HP/SP).
+
+@hide
+Versteckt dich vor Monstern und auf der Onlineliste, jedoch bleibst du trotzdem Sichtbar.
+
+@jump
+Du springst zu einem Willkührlichen Punkt auf der Map.
+
+@return
+Warpt dich zu deinem letzten Speicherpunkt.
+
+@warp
+Warpt dich zur angegebenen Map, bsp.: @warp 001-1 12 34
+
+//@dye
+//Ändert die Farbe deiner Kleidung ( kein effekt, da von eAthena geerbt.).
+
+@hairstyle
+Ändert deinen Haarstyle zu der gewünschten ID.
+
+@haircolor
+Ändert deine Haarfarbe zu der gewünschten ID.
+
+@itemreset
+Entfernt all deine Items.
+
+@disablenpc
+Deaktiviert den angegebenen NPC.
+
+@enablenpc
+Aktiviert den angegebenen NPC.
+
+@save
+Ändert den aktuellen standpunkt zu deinem Save/Spawn/Home-punkt. (Falls keine Coordinaten angegeben werden).
+
+@l
+(Sollte) einen eintrag ins GM-Log-System machen, zb. für verwarnungen (Gleich wie @t).
+
+@t
+(Sollte) einen eintrag ins GM-Log-System machen, zb. für verwarnungen (Gleich wie @l).
