@@ -97,10 +97,15 @@ L_Close:
     set @cost_snake, 0;
     return;
 
+}
+
   //HIER BEGINNT DIE DEUTSCHE FASSUNG!!!
 
 LG_Main:
+ mes "[Evil Obelisk]";
     mes "(Eine mystische Auro umgibt den Stein.  Es scheint als begehrte es ihm nach Geld.)";
+    next;
+
     set @cost_jacko, 6500;
     set @cost_gy1, 4000;
     set @cost_gy2, 3000;
