@@ -183,7 +183,7 @@ L_NotEnough:
 
 LGMain:
  mes "[Evil Obelisk]";
-    mes "(A mystical aura surrounds this stone.  It seems to crave money.)";
+    mes "(Eine mystische Auro umgibt den Stein.  Es scheint als begehrte es ihm nach Geld.)";
     next;
 
     set @cost_jacko, 6500;
@@ -193,12 +193,12 @@ LGMain:
     set @cost_snake, 2500;
 
     menu
-        "Don't pay it anything.", -,
-        "Pay it " + @cost_jacko + " gold.", LG_JACKO,
-        "Pay it " + @cost_gy1 + " gold.", LG_GRAVEYARD1,
-        "Pay it " + @cost_gy2 + " gold.", LG_GRAVEYARD2,
-        "Pay it " + @cost_skull + " gold.", LG_SKULL,
-        "Pay it " + @cost_snake + " gold.", LG_SNAKE;
+        "Zahle ihm nichts.", -,
+        "Zahle ihm " + @cost_jacko + " Gold.", LG_JACKO,
+        "Zahle ihm " + @cost_gy1 + " Gold.", LG_GRAVEYARD1,
+        "Zahle ihm " + @cost_gy2 + " Gold.", LG_GRAVEYARD2,
+        "Zahle ihm " + @cost_skull + " Gold.", LG_SKULL,
+        "Zahle ihm " + @cost_snake + " Gold.", LG_SNAKE;
     goto LG_Close;
 LG_JACKO:
     if (Zeny < @cost_jacko)
@@ -351,7 +351,7 @@ LG_Summon:
     goto LG_Close;
 
 LG_NotEnough:
-    mes "You don't have that much money";
+    mes "Du hast nicht genug Geld";
     goto LG_Close;
 
 
