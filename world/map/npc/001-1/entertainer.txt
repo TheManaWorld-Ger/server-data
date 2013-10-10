@@ -1,16 +1,23 @@
 // Emote NPC allows for players to learn the emote skill
 
-001-1.gat,30,45,0|script|Entertainer|165,
+001-1.gat,30,45,0|script|[Entertainer]|165,
 {
-    if (getskilllv(SKILL_EMOTE) > 0) goto L_Has;
+    if( LanguageGer==0) goto L_Main;
 
+
+    //DEUTSCHER BEREICH!
+    if(LanguageGer==1) goto LG_Main;
+
+//ENGLISH AREA
+L_Main:
+    if (getskilllv(SKILL_EMOTE) > 0) goto L_Has;
     mes "[Entertainer]";
     mes "\"Yes how can I help you?\"";
     menu
         "How are you showing emotions above your head?", L_Learn,
         "Never mind", -;
     goto L_Close;
-
+    next;
 L_Learn:
     mes "[Entertainer]";
     mes "\"They are called emotes, I use them to express how I am feeling.";
@@ -34,6 +41,44 @@ L_Has:
     goto L_Close;
 
 L_Close:
+    close;
+
+
+  //HIER BEGINNT DIE DEUTSCHE FASSUNG!!!
+
+LG_Main:
+      if (getskilllv(SKILL_EMOTE) > 0) goto LG_Has;
+      mes "[Entertainer]";
+      mes "\"Wie kann ich dir helfen?\"";
+      menu
+          "Wie zeigst du die Smileys über deinem Kopf?", LG_Learn,
+          "Schon gut", -;
+      goto LG_Close;
+      next;
+
+LG_Learn:
+    mes "[Entertainer]";
+    mes "\"Sie werden Smileys genannt, ich drücke mit ihrer Hilfe meine Gefühle aus.";
+    mes "Möchtest du, dass ich dir ihren Gebrauch lehre?";
+    menu
+        "Ja, bitte.", LG_Learn2,
+        "Ich wüsste derzeit nicht weshalb.";
+    goto LG_Close;
+
+LG_Learn2:
+    setskill SKILL_EMOTE, 1;
+    mes "[Entertainer]";
+    mes "\"Alles was du tun musst ist ALT und eine Nummer gleichzeitig zu drücken.";
+    mes "Die Nummer bestimmt welcher Smiley angezeigt wird.";
+    mes "Einige Spiel-Clients zeigen dir eine Smiley-Shortcut-Leiste, wenn du F12 drückst.\"";
+    goto LG_Close;
+
+LG_Has:
+    mes "[Entertainer]";
+    mes "\"Das Leben eines Unterhaltungskünstlers ist ein hartes leben.\" Seufz.";
+    goto LG_Close;
+
+LG_Close:
     close;
 
 OnTimer3000:
