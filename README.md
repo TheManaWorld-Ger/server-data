@@ -16,6 +16,7 @@ müssen:
    * Beim Deutschsprachigen Bereich der NPC-Dateien wird vorranstehend "LG_" genutzt. Beispiel: "LG_Start"
    * Desweiteren ist darauf zu achten, dass der Name des Fertigen Npc in diesen klammern
     "[ ]" geschrieben wird. Bsp.: "001-1.gat,110,71,0|script|Sandra|114,"  wird zu  "001-1.gat,110,71,0|script|[Sandra]|114,"
+
 Bugs bzw. Tickets("Issues") werden in den Checklisten(Benannt nach
 Npc_Checklist Map-Submap.txt) nach "DONE#ISSUE-NUMMER" erstellt/eingefügt. Beispiel: "//*DONE--is#99*//"
 für Ticket Nr. 99.
