@@ -1,7 +1,7 @@
 //Checklist for D&E Npc's (001-1)
 --//001-1://--
 banker.txt                //*DONE*//
-barber.txt                //*DONE--is#3*//
+barber.txt                //*DONE--is#10*//
 bard.txt                //*---*//
 bernard.txt               //*---*//
 bleacher.txt              //*---*//
