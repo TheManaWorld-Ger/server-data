@@ -1,13 +1,13 @@
 // Teaches Trading skill
 // Offers item conversion for non-magic users
-// Updated by: TheKandiman
-// Reviewed by: Wombat
+
 
 001-1.gat,57,33,0|script|Trader|115,
 {
     set @Ironprice, 1000;
     set @Sulphurprice, 1200;
     set @Potionprice, 500;
+    if(LanguageGer==1) goto LG_Main;
     if ((getskilllv(SKILL_TRADE) > 0) && BaseLevel >= 25) goto L_Trade;
     if (getskilllv(SKILL_TRADE) > 0) goto L_Later;
 
@@ -158,6 +158,168 @@ L_No:
     mes "[Trader]";
     mes "\"Have a great day!\"";
     goto L_Close;
+
+
+
+
+
+  //HIER BEGINNT DIE DEUTSCHE FASSUNG!!!
+
+
+
+
+ LG_Main:
+     if ((getskilllv(SKILLG_TRADE) > 0) && BaseLevel >= 25) goto LG_Trade;
+     if (getskilllv(SKILLG_TRADE) > 0) goto LG_Later;
+
+     mes "[Trader]";
+     mes "\"Hallo. Ich kam nach hier um meine waren mit den Leuten aus Tulimshar zu tauschen. Unglücklicherweise für dich, hab ich alles vertauscht, was ich hatte. \"";
+     next;
+     menu
+         "Oh. Dann werd ich wohl gehen", -,
+         "Hast du wirklich nichts?", LG_More;
+     goto L_Close;
+
+ LG_More:
+     mes "[Trader]";
+     mes "\"Nein.Ich habe wirklich nichts für dich. Außer...\"";
+     next;
+     menu
+         "JA?", LG_Except,
+         "Ok dann nicht.",  -;
+     goto L_Close;
+
+ LG_Except:
+     mes "[Trader]";
+     mes "\"Ich könnte dich lehren wie man handelt. Es würde dich 5GP kosten.\"";
+     next;
+     menu
+         "Sicher.", LG_Teach,
+         "Nein danke.", -;
+     goto L_Close;
+
+ LG_Teach:
+     if (Zeny < 5) goto LG_NotEnoughMoney;
+     set Zeny, Zeny - 5;
+     setskill SKILLG_TRADE, 1;
+     mes "[Trader]";
+     mes "\"Du kannst mit jemanden handeln, indem du Rechtsklick auf der gewünschten Person machst und Handeln wählst.  ";
+     mes "Ihr beide fügt die gewünschten Gegenstände und GPs ein und klickt auf Handel vorschlagen.";
+     mes "Nachdem beide sich dazu entschieden haben den Handel vorzuschlagen könnt ihr den Handel mit zustimmen, indem du auf annehmen oder abbrechen durch schließen des Fenstes.\"";
+     next;
+     mes "[Trader]";
+     mes "\"Gegenstände die hinzugefügt wurden können nicht wieder zurückgenommen werden, so dass kein Fehler beim handeln geschehen kann.";
+     mes "Du musst auf das Feld "Ändern" klicken um die gewünschte Anzahl an GPs hinzuzufügen.  \"";
+     next;
+     goto LG_Later;
+
+ LG_Later:
+     mes "[Trader]";
+     mes "\"Komm doch später mal wieder. Ich erwarte viele gute neue Sachen.\"";
+     goto L_Close;
+
+LG_Trade:
+    mes "[Trader]";
+    mes "\"Willkommen zurück! Meine Lieferung ist gekommen, und ich habe viele neue Sachen zum Tausch. Möchtest du etwas?\"";
+    goto LG_Trademenu;
+
+LG_Trademenu:
+    menu
+        "Hast du Eisenpulver?", LG_Iron,
+        "Wie wäre es mit Schwefelpulver?", LG_Sulphur,
+        "Ich brauche Mittlere Heiltränke.", LG_Healpots,
+        "Ich glaube ich hab alles was ich brauche.", -;
+    goto L_Close;
+
+ LG_Iron:
+     mes "[Trader]";
+     mes "\"Ich habe ein paar davon. Ich gebe dir 4 Eisenpulver für ein Eisenerz und " + @Ironprice + "GP.\"";
+     menu
+         "Sicher.", LG_Ipowder,
+         "Was für eine Abzocke!Niemals!", -;
+     goto L_Close;
+
+ LG_Sulphur:
+     mes "[Trader]";
+     mes "\"Ich kann dir 5 Schwefelpulver für 1 Haufen Asche und " + @Sulphurprice + "GP geben.\"";
+     menu
+         "Hier hast du es.", LG_Spowder,
+         "Bist du verrückt? Vergiss es!", -;
+     goto L_Close;
+
+ LG_Healpots:
+     mes "[Trader]";
+     mes "\"Ich kann dir einen Mittelgroßen Heiltrank für 3 Kleine Heiltränke und " + @Potionprice + "GP.\"";
+     menu
+         "Ok.", LG_Pots,
+         "Whoa, das ist viel zuviel.", -;
+     goto L_Close;
+
+ LG_Ipowder:
+     if (countitem("IronOre") < 1) goto LG_Missing;
+     if (Zeny < @Ironprice) goto LG_NotEnoughMoney;
+     getinventorylist;
+     if (@inventorylist_count == 100 && countitem("IronOre") > 1 && countitem("IronPowder") < 1) goto LG_Full;
+     delitem "IronOre", 1;
+     set Zeny, Zeny - @Ironprice;
+     getitem "IronPowder", 4;
+     mes "[Trader]";
+     mes "\"Hier hast du es.  Möchtest du noch etwas?\"";
+     menu
+         "Ja.", LG_Trademenu,
+         "Nein.", LG_No;
+     goto L_Close;
+
+ LG_Spowder:
+     if (countitem("PileOfAsh") < 1) goto LG_Missing;
+     if (Zeny < @Sulphurprice) goto LG_NotEnoughMoney;
+     getinventorylist;
+     if (@inventorylist_count == 100 && countitem("PileOfAsh") > 1 && countitem("SulphurPowder") < 1) goto LG_Full;
+     delitem "PileOfAsh", 1;
+     set Zeny, Zeny - @Sulphurprice;
+     getitem "SulphurPowder", 5;
+     mes "[Trader]";
+     mes "\"Hier hast du es. Möchtest du noch etwas?\"";
+     menu
+         "Ja.", LG_Trademenu,
+         "Nein.", LG_No;
+     goto L_Close;
+
+ LG_Pots:
+     if (countitem("SmallHealingPotion") < 3) goto LG_Missing;
+     if (Zeny < @Potionprice) goto LG_NotEnoughMoney;
+     getinventorylist;
+     if (@inventorylist_count == 100 && countitem("SmallHealingPotion") > 3 && countitem("MediumHealingPotion") <1) goto LG_Full;
+     delitem "SmallHealingPotion", 3;
+     set Zeny, Zeny - @Potionprice;
+     getitem "MediumHealingPotion", 1;
+     mes "[Trader]";
+     mes "\"Hier hast du es.  Möchtest du noch etwas?\"";
+     menu
+         "Ja.", LG_Trademenu,
+         "Nein.", LG_No;
+     goto L_Close;
+
+ LG_Full:
+     mes "[Trader]";
+     mes "\"Du musst viel gehandelt haben... dein Inventar ist komplett voll! Komm später wieder wenn du wieder platz hast.\"";
+     goto L_Close;
+
+ LG_Missing:
+     mes "[Trader]";
+     mes "\"Es scheint,dass ein paar Sachen fehlen. Komm wieder wenn du alles hast.\"";
+     goto L_Close;
+
+ LG_NotEnoughMoney:
+     mes "[Trader]";
+     mes "\"Du hast nicht genug GP.\"";
+     goto L_Close;
+
+ LG_No:
+     mes "[Trader]";
+     mes "\"Hab einen schönen Tag!\"";
+     goto L_Close;
+
 
 L_Close:
     set @Ironprice, 0;
