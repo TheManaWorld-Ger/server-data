@@ -12,7 +12,7 @@ entertainer.txt             //*DONE*//
 gossip.txt                //*---*//
 guards.txt                //*---*//
 guide.txt               //*---*//
-luca.txt                //*---*//
+luca.txt                //*Initalised*//
 mikhail.txt               //*Initalised*//
 monster_guide.txt           //*Initalised*//
 npcs.txt                //*---*//
