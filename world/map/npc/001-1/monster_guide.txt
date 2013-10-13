@@ -1,6 +1,6 @@
 //
 
-001-1.gat,48,52,0|script|Aidan|102,
+001-1.gat,48,52,0|script|[Aidan]|102,
 {
     if(LanguageGer==1) goto LG_Main;
 
