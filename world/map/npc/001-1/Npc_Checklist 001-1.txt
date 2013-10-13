@@ -11,7 +11,7 @@ elanore.txt               //*---*//
 entertainer.txt             //*DONE*//
 gossip.txt                //*---*//
 guards.txt                //*---*//
-guide.txt               //*---*//
+guide.txt               //*Initalised*//
 luca.txt                //*Initalised*//
 mikhail.txt               //*Initalised*//
 monster_guide.txt           //*Initalised*//
