@@ -6,7 +6,7 @@
     callfunc "ClearVarTMW_Quest";
 
     set @state, ((QUEST_SouthTulimshar & NIBBLE_0_MASK) >> NIBBLE_0_SHIFT);
-
+    if(LanguageGer==1) goto LG_Main;
     if (@state >= 6) goto L_Done;
     if (@state == 5) goto L_Progress;
     if (@state == 4) goto L_Start;
@@ -63,6 +63,72 @@ L_Done:
     mes "[Mikhail]";
     mes "\"Thanks again for helping me get those Maggot Slimes!\"";
     goto L_Close;
+
+  //HIER BEGINNT DIE DEUTSCHE FASSUNG!!!
+
+
+
+
+LG_Main:
+    if (@state >= 6) goto LG_Done;
+    if (@state == 5) goto LG_Progress;
+    if (@state == 4) goto LG_Start;
+    if (@state < 4) goto LG_Convince_Mikhail_First;
+LG_Convince_Mikhail_First:
+    mes "[Mikhail]";
+    mes "\"Hello...\"";
+    mes "";
+    mes "It seems that the boy would like to say more, but does not dare to open up to you. Maybe you should help someone else first, so that he sees your intentions are good.";
+    goto L_Close;
+
+LG_Start:
+    mes "[Mikhail]";
+    mes "\"My grandma sent me to get five Maggot Slimes from the maggots in the desert, but they scare me so bad!\"";
+    next;
+    mes "\"You look like a nice person.  Would you go get them for me?\"";
+    menu
+        "Of course, I'll go get them for you.", LG_accept,
+        "I've got other things to do right now.", LG_Close;
+
+LG_accept:
+    mes "[Mikhail]";
+    mes "\"Thank you so much!  I'll wait for you here.\"";
+    set @state, 5;
+    callsub S_Update_Var;
+    close;
+
+LG_Progress:
+    mes "[Mikhail]";
+    mes "\"Did you bring me the five Maggot Slimes I need?\"";
+    next;
+    menu
+        "Yes, here they are, kiddo!", LG_try,
+        "Not yet, but I'll be back soon.", L_Close;
+
+LG_try:
+    if (countitem("MaggotSlime") >= 5)
+        goto LG_get;
+    mes "[Mikhail]";
+    mes "\"It doesn't look like you have them all...\"";
+    goto L_Close;
+
+LG_get:
+    delitem "MaggotSlime", 5;
+    getexp 100, 0;
+    set @state, 6;
+    callsub S_Update_Var;
+    mes "[Mikhail]";
+    mes "\"Ooh!  Thank you so much!  I can get back to my grandma now!\"";
+    goto L_Close;
+
+LG_Done:
+    mes "[Mikhail]";
+    mes "\"Thanks again for helping me get those Maggot Slimes!\"";
+    goto L_Close;
+
+
+//Language unspecifid
+
 
 L_Close:
     set @state, 0;
