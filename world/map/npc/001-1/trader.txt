@@ -173,11 +173,11 @@ L_No:
      if (getskilllv(SKILLG_TRADE) > 0) goto LG_Later;
 
      mes "[Trader]";
-     mes "\"Hallo. Ich kam nach hier um meine waren mit den Leuten aus Tulimshar zu tauschen. Unglücklicherweise für dich, hab ich alles vertauscht, was ich hatte. \"";
+     mes "\"Hallo. Ich bin hierhergekommen, um mit den Leuten in Tulimshar zu tauschen. Leider gibt es im Moment nichts, was ich tauschen könnte. \"";
      next;
      menu
-         "Oh. Dann werd ich wohl gehen", -,
-         "Hast du wirklich nichts?", LG_More;
+         "Oh. Dann werde ich wohl mal gehen.", -,
+         "Du hast wirklich nichts?", LG_More;
      goto L_Close;
 
  LG_More:
@@ -185,13 +185,13 @@ L_No:
      mes "\"Nein.Ich habe wirklich nichts für dich. Außer...\"";
      next;
      menu
-         "JA?", LG_Except,
-         "Ok dann nicht.",  -;
+         "Ja?", LG_Except,
+         "Ok dann eben nicht.",  -;
      goto L_Close;
 
  LG_Except:
      mes "[Trader]";
-     mes "\"Ich könnte dich lehren wie man handelt. Es würde dich 5GP kosten.\"";
+     mes "\"Ich könnte dir zeigen wie man tauscht. Es wird dich aber 5GP kosten.\"";
      next;
      menu
          "Sicher.", LG_Teach,
@@ -203,24 +203,24 @@ L_No:
      set Zeny, Zeny - 5;
      setskill SKILLG_TRADE, 1;
      mes "[Trader]";
-     mes "\"Du kannst mit jemanden handeln, indem du Rechtsklick auf der gewünschten Person machst und Handeln wählst.  ";
-     mes "Ihr beide fügt die gewünschten Gegenstände und GPs ein und klickt auf Handel vorschlagen.";
-     mes "Nachdem beide sich dazu entschieden haben den Handel vorzuschlagen könnt ihr den Handel mit zustimmen, indem du auf annehmen oder abbrechen durch schließen des Fenstes.\"";
+     mes "\"Du kannst eine Tausch-Anfrage senden, indem du einen Spieler rechtsklickst und dann \"Trade\" auswählst. ";
+     mes "Wenn die Person einverstanden ist, öffnet sich ein Tauschfenster, wo ihr beide Geld und Gegenstände hinzufügen könnt.";
+     mes "Nachdem beide Seiten ihre Sachen eingegeben haben, könnt ihr beide sehen, was der andere hinzugefügt hat und dann den Tausch akzeptieren oder abbrechen.\"";
      next;
      mes "[Trader]";
-     mes "\"Gegenstände die hinzugefügt wurden können nicht wieder zurückgenommen werden, so dass kein Fehler beim handeln geschehen kann.";
-     mes "Du musst auf das Feld "Ändern" klicken um die gewünschte Anzahl an GPs hinzuzufügen.  \"";
+     mes "\"Items, die hinzugefügt wurden, können nicht zurückgenommen werden. In dem Fall muss der Tausch abgebrochen werden.";
+     mes "Um Gegenstände hinzuzufügen, öffne dein Inventar und klicke einmal auf den Gegenstand. Dann drücke im Tauschfenster auf \"Hinzufügen\" und der Gegenstand erscheint. Wenn du Geld hinzufügen willst, gib die Summe ein und drücke \"ändern\". Wenn beide Seiten mit dem Tausch einverstanden sind, dann drückt beide auf \"Akzeptieren\" und danach auf \"Bestätigen\". Dann ist der Tausch offiziell abgeschlossen.\"";
      next;
      goto LG_Later;
 
  LG_Later:
      mes "[Trader]";
-     mes "\"Komm doch später mal wieder. Ich erwarte viele gute neue Sachen.\"";
+     mes "\"Komm doch irgentwann mal wieder vorbei, Ich erwarte viele tolle sachen in der nächsten zeit.\"";
      goto L_Close;
 
 LG_Trade:
     mes "[Trader]";
-    mes "\"Willkommen zurück! Meine Lieferung ist gekommen, und ich habe viele neue Sachen zum Tausch. Möchtest du etwas?\"";
+    mes "\"Willkommen zurück! Meine Lieferung ist gekommen, und ich habe viele neue Sachen zum Tausch. Möchtest du dir die Sachen ansehen?\"";
     goto LG_Trademenu;
 
 LG_Trademenu:
@@ -236,20 +236,20 @@ LG_Trademenu:
      mes "\"Ich habe ein paar davon. Ich gebe dir 4 Eisenpulver für ein Eisenerz und " + @Ironprice + "GP.\"";
      menu
          "Sicher.", LG_Ipowder,
-         "Was für eine Abzocke!Niemals!", -;
+         "Das ist ja Wucher! Niemals!", -;
      goto L_Close;
 
  LG_Sulphur:
      mes "[Trader]";
      mes "\"Ich kann dir 5 Schwefelpulver für 1 Haufen Asche und " + @Sulphurprice + "GP geben.\"";
      menu
-         "Hier hast du es.", LG_Spowder,
+         "Ok tauschen wir.", LG_Spowder,
          "Bist du verrückt? Vergiss es!", -;
      goto L_Close;
 
  LG_Healpots:
      mes "[Trader]";
-     mes "\"Ich kann dir einen Mittelgroßen Heiltrank für 3 Kleine Heiltränke und " + @Potionprice + "GP.\"";
+     mes "\"Ich kann dir einen Mittelgroßen Heiltrank für 3 Kleine Heiltränke und " + @Potionprice + "GP anbieten.\"";
      menu
          "Ok.", LG_Pots,
          "Whoa, das ist viel zuviel.", -;
@@ -264,7 +264,7 @@ LG_Trademenu:
      set Zeny, Zeny - @Ironprice;
      getitem "IronPowder", 4;
      mes "[Trader]";
-     mes "\"Hier hast du es.  Möchtest du noch etwas?\"";
+     mes "\"Ok hier sind deine Items, möchtest du noch etwas?\"";
      menu
          "Ja.", LG_Trademenu,
          "Nein.", LG_No;
@@ -279,7 +279,7 @@ LG_Trademenu:
      set Zeny, Zeny - @Sulphurprice;
      getitem "SulphurPowder", 5;
      mes "[Trader]";
-     mes "\"Hier hast du es. Möchtest du noch etwas?\"";
+     mes "\"Ok hier sind deine Items, möchtest du noch etwas?\"";
      menu
          "Ja.", LG_Trademenu,
          "Nein.", LG_No;
@@ -294,7 +294,7 @@ LG_Trademenu:
      set Zeny, Zeny - @Potionprice;
      getitem "MediumHealingPotion", 1;
      mes "[Trader]";
-     mes "\"Hier hast du es.  Möchtest du noch etwas?\"";
+     mes "\"Ok hier sind deine Items, möchtest du noch etwas?\"";
      menu
          "Ja.", LG_Trademenu,
          "Nein.", LG_No;
@@ -302,12 +302,12 @@ LG_Trademenu:
 
  LG_Full:
      mes "[Trader]";
-     mes "\"Du musst viel gehandelt haben... dein Inventar ist komplett voll! Komm später wieder wenn du wieder platz hast.\"";
+     mes "\"Du musst viel gehandelt haben... dein Inventar ist komplett voll! Komm doch bitte später wieder, wenn du wieder platz hast.\"";
      goto L_Close;
 
  LG_Missing:
      mes "[Trader]";
-     mes "\"Es scheint,dass ein paar Sachen fehlen. Komm wieder wenn du alles hast.\"";
+     mes "\"Für den Handel fehlen leider noch ein paar sachen, aber Deal ist Deal. Komm wieder wenn du alles hast.\"";
      goto L_Close;
 
  LG_NotEnoughMoney:
@@ -317,7 +317,7 @@ LG_Trademenu:
 
  LG_No:
      mes "[Trader]";
-     mes "\"Hab einen schönen Tag!\"";
+     mes "\"Ich wünsche dir einen schönen Tag!\"";
      goto L_Close;
 
 
